@@ -59,3 +59,7 @@ Empresas pequeñas que necesitan una página web funcional y atractiva
 📂 Archivo incluido
 
 llantas_sas_complete.html: página completa lista para desplegar en hosting o servidor local.
+
+Derechos:Cristian Rodríguez Código: 2269613
+Santiago Ocampo Código: 2262408
+Juan Esteban vergara Código:2362578
