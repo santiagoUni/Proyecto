@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLANTAS S.A.S - Taller Especializado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background: #2a5298;
+            padding: 10px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .header-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #FF6B35;
+            padding: 0;
+        }
+
+        .nav-item {
+            display: block;
+            background: #2196F3;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .nav-item:hover {
+            background: #1976D2;
+            padding-left: 30px;
+        }
+
+        .nav-item.active {
+            background: #FF6B35;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        .welcome-box {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-box h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #FFD700;
+        }
+
+        .welcome-box p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .services-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .services-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .services-list {
+            list-style: none;
+        }
+
+        .service-item {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .service-item:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .service-item::before {
+            content: counter(service-counter);
+            counter-increment: service-counter;
+            background: #FF6B35;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .services-list {
+            counter-reset: service-counter;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            margin: 0 10px;
+            background: #2196F3;
+            border-radius: 50%;
+            line-height: 35px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: #FF6B35;
+            transform: scale(1.2);
+        }
+
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #fff 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, #fff 2px, transparent 2px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+            }
+            
+            .nav-item {
+                white-space: nowrap;
+                min-width: 120px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div style="width: 60px; height: 60px; background: #FF6B35; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                    <span style="font-size: 24px;">🛞</span>
+                </div>
+                <div>
+                    <div>LLANTAS S.A.S</div>
+                    <div style="font-size: 12px; opacity: 0.8;">Taller Especializado</div>
+                </div>
+            </div>
+            <div class="header-buttons">
+                <button class="header-btn" onclick="showContact()">📞 Contactar</button>
+                <button class="header-btn" onclick="showLocation()">📍 Ubicación</button>
+                <button class="header-btn" onclick="showQuote()">💰 Cotizar</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <a href="#" class="nav-item active" onclick="showSection('inicio')">🏠 INICIO</a>
+            <a href="#" class="nav-item" onclick="showSection('servicios')">🔧 SERVICIOS</a>
+            <a href="#" class="nav-item" onclick="showSection('productos')">🛞 PRODUCTOS</a>
+            <a href="#" class="nav-item" onclick="showSection('promociones')">🎯 PROMOCIONES</a>
+            <a href="#" class="nav-item" onclick="showSection('nosotros')">👥 NOSOTROS</a>
+            <a href="#" class="nav-item" onclick="showSection('metodo-pago')">💳 MÉTODO DE PAGO</a>
+            <a href="#" class="nav-item" onclick="showSection('reservas')">📅 RESERVAS</a>
+            <a href="#" class="nav-item" onclick="showSection('configuracion')">⚙️ CONFIGURACIÓN</a>
+            <a href="#" class="nav-item" onclick="showSection('inventario')">📦 INVENTARIO</a>
+        </nav>
+
+        <main class="main-content">
+            <div class="welcome-box">
+                <h1>LLANTAS S.A.S - Tu Taller de Confianza</h1>
+                <p>Somos especialistas en el servicio de venta de neumáticos y repuestos para cualquier tipo de carro. Donde podrás realizar cambio de llantas, lubricantes, repuestos, entre otros servicios.</p>
+            </div>
+
+            <div class="services-container" id="content-area">
+                <h2 class="services-title">Nuestros Servicios Principales</h2>
+                <ul class="services-list">
+                    <li class="service-item" onclick="selectService('cambio')">
+                        <strong>Cambio de neumáticos</strong> - Instalación profesional y balanceado
+                    </li>
+                    <li class="service-item" onclick="selectService('lubricantes')">
+                        <strong>Lubricantes</strong> - Cambio de aceite y filtros de calidad
+                    </li>
+                    <li class="service-item" onclick="selectService('calibracion')">
+                        <strong>Calibración de llantas</strong> - Presión adecuada para tu seguridad
+                    </li>
+                    <li class="service-item" onclick="selectService('separado')">
+                        <strong>Sistema de separado</strong> - Apartado de productos
+                    </li>
+                    <li class="service-item" onclick="selectService('llantas')">
+                        <strong>Llantas</strong> - Amplio catálogo de marcas reconocidas
+                    </li>
+                    <li class="service-item" onclick="selectService('cliente')">
+                        <strong>Servicio al cliente</strong> - Atención personalizada 24/7
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>Desarrollado en Amor © 2025</p>
+        <div class="social-icons">
+            <a href="#" class="social-icon">📘</a>
+            <a href="#" class="social-icon">🐦</a>
+            <a href="#" class="social-icon">📷</a>
+        </div>
+    </footer>
+
+    <script>
+        // Variables para manejar el contenido dinámico
+        let currentSection = 'inicio';
+        
+        // Contenido para cada sección
+        const sectionContent = {
+            inicio: `
+                <h2 class="services-title">Bienvenido a LLANTAS S.A.S</h2>
+                <ul class="services-list">
+                    <li class="service-item" onclick="selectService('cambio')">
+                        <strong>Cambio de neumáticos</strong> - Instalación profesional y balanceado
+                    </li>
+                    <li class="service-item" onclick="selectService('lubricantes')">
+                        <strong>Lubricantes</strong> - Cambio de aceite y filtros de calidad
+                    </li>
+                    <li class="service-item" onclick="selectService('calibracion')">
+                        <strong>Calibración de llantas</strong> - Presión adecuada para tu seguridad
+                    </li>
+                    <li class="service-item" onclick="selectService('separado')">
+                        <strong>Sistema de separado</strong> - Apartado de productos
+                    </li>
+                    <li class="service-item" onclick="selectService('llantas')">
+                        <strong>Llantas</strong> - Amplio catálogo de marcas reconocidas
+                    </li>
+                    <li class="service-item" onclick="selectService('cliente')">
+                        <strong>Servicio al cliente</strong> - Atención personalizada
+                    </li>
+                </ul>
+            `,
+            servicios: `
+                <h2 class="services-title">Servicios Detallados</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="service-item">
+                        <h3>🔧 Mecánica General</h3>
+                        <p>Reparaciones y mantenimiento completo para tu vehículo</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🛞 Especialistas en Llantas</h3>
+                        <p>Montaje, balanceado, alineación y reparación</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🛢️ Cambio de Aceite</h3>
+                        <p>Lubricantes de primera calidad para tu motor</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🔍 Diagnóstico</h3>
+                        <p>Revisión completa con equipos especializados</p>
+                    </div>
+                </div>
+            `,
+            productos: `
+                <h2 class="services-title">Catálogo de Productos</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <div class="service-item">
+                        <h3>🛞 Llantas</h3>
+                        <p><strong>Marcas disponibles:</strong> Michelin, Bridgestone, Goodyear, Continental</p>
+                        <p>Desde $150.000 hasta $800.000</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🛢️ Lubricantes</h3>
+                        <p><strong>Aceites:</strong> Castrol, Mobil 1, Shell, Valvoline</p>
+                        <p>Desde $45.000 hasta $120.000</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🔧 Repuestos</h3>
+                        <p><strong>Filtros, pastillas, bandas:</strong> Bosch, NGK, Denso</p>
+                        <p>Desde $25.000 hasta $200.000</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🔋 Baterías</h3>
+                        <p><strong>Marcas:</strong> Varta, Bosch, Duncan</p>
+                        <p>Desde $180.000 hasta $450.000</p>
+                    </div>
+                </div>
+            `,
+            promociones: `
+                <h2 class="services-title">Promociones Especiales</h2>
+                <div style="display: grid; gap: 20px;">
+                    <div class="service-item" style="background: linear-gradient(45deg, #FF6B35, #F7931E);">
+                        <h3>🎯 Oferta del Mes</h3>
+                        <p>20% de descuento en cambio de aceite + filtro</p>
+                        <small>Válido hasta el 31 de julio</small>
+                    </div>
+                    <div class="service-item" style="background: linear-gradient(45deg, #4CAF50, #8BC34A);">
+                        <h3>🛞 Combo Llantas</h3>
+                        <p>Compra 4 llantas y recibe balanceado gratis</p>
+                        <small>Aplica para llantas seleccionadas</small>
+                    </div>
+                    <div class="service-item" style="background: linear-gradient(45deg, #9C27B0, #E91E63);">
+                        <h3>⚡ Descuento Estudiantes</h3>
+                        <p>15% de descuento presentando carnet estudiantil</p>
+                        <small>No acumulable con otras promociones</small>
+                    </div>
+                </div>
+            `,
+            nosotros: `
+                <h2 class="services-title">Acerca de LLANTAS S.A.S</h2>
+                <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; color: #333;">
+                    <div class="service-item" style="background: linear-gradient(45deg, #2196F3, #21CBF3); margin-bottom: 20px;">
+                        <h3>🏢 Nuestra Historia</h3>
+                        <p>Con más de 15 años de experiencia en el sector automotriz, nos hemos consolidado como el taller de confianza para miles de clientes en la región.</p>
+                    </div>
+                    <div class="service-item" style="background: linear-gradient(45deg, #FF6B35, #F7931E); margin-bottom: 20px;">
+                        <h3>🎯 Nuestra Misión</h3>
+                        <p>Brindar servicios automotrices de calidad, con personal capacitado y tecnología de punta, garantizando la satisfacción y seguridad de nuestros clientes.</p>
+                    </div>
+                    <div class="service-item" style="background: linear-gradient(45deg, #4CAF50, #8BC34A);">
+                        <h3>👥 Nuestro Equipo</h3>
+                        <p>Contamos con técnicos certificados y especializados en diferentes áreas: mecánica, electricidad, llantas y servicio al cliente.</p>
+                    </div>
+                </div>
+            `,
+            'metodo-pago': `
+                <h2 class="services-title">Métodos de Pago</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="service-item">
+                        <h3>💳 Tarjetas</h3>
+                        <p>Aceptamos todas las tarjetas de crédito y débito</p>
+                        <p><strong>Visa, Mastercard, American Express</strong></p>
+                    </div>
+                    <div class="service-item">
+                        <h3>💰 Efectivo</h3>
+                        <p>Pago en efectivo con descuento especial</p>
+                        <p><strong>5% de descuento adicional</strong></p>
+                    </div>
+                    <div class="service-item">
+                        <h3>📱 Transferencias</h3>
+                        <p>Nequi, Bancolombia, Daviplata</p>
+                        <p><strong>Pago inmediato y seguro</strong></p>
+                    </div>
+                    <div class="service-item">
+                        <h3>🏦 Financiación</h3>
+                        <p>Planes de financiación hasta 12 meses</p>
+                        <p><strong>Sin intereses en compras mayores a $500.000</strong></p>
+                    </div>
+                </div>
+            `,
+            reservas: `
+                <h2 class="services-title">Sistema de Reservas</h2>
+                <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px;">
+                    <div class="service-item" onclick="alert('Funcionalidad de reserva en línea próximamente. Por ahora contáctanos al teléfono.')">
+                        <h3>📅 Reservar Cita</h3>
+                        <p>Agenda tu cita en línea y evita esperas</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div class="service-item">
+                            <h4>🕐 Horarios</h4>
+                            <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                            <p>Sábados: 8:00 AM - 4:00 PM</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>⏱️ Servicios Express</h4>
+                            <p>Cambio de aceite: 30 min</p>
+                            <p>Calibración: 15 min</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>🎯 Servicios Programados</h4>
+                            <p>Cambio de llantas: 1 hora</p>
+                            <p>Mantenimiento: 2-3 horas</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            configuracion: `
+                <h2 class="services-title">Configuración de Cuenta</h2>
+                <div style="display: grid; gap: 20px;">
+                    <div class="service-item" onclick="alert('Para cambiar tu información de contacto, llámanos al (123) 456-7890')">
+                        <h3>👤 Información Personal</h3>
+                        <p>Actualizar datos de contacto y vehículo</p>
+                    </div>
+                    <div class="service-item" onclick="alert('Historial de servicios disponible en nuestra base de datos')">
+                        <h3>📋 Historial de Servicios</h3>
+                        <p>Consulta el historial de mantenimiento de tu vehículo</p>
+                    </div>
+                    <div class="service-item" onclick="alert('Configurar recordatorios de mantenimiento por WhatsApp')">
+                        <h3>🔔 Recordatorios</h3>
+                        <p>Configurar alertas de mantenimiento preventivo</p>
+                    </div>
+                    <div class="service-item" onclick="alert('Programa de fidelización: por cada 5 servicios, obtén un descuento del 10%')">
+                        <h3>⭐ Programa de Fidelidad</h3>
+                        <p>Acumula puntos y obtén descuentos exclusivos</p>
+                    </div>
+                </div>
+            `,
+            inventario: `
+                <h2 class="services-title">Estado del Inventario</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="service-item" style="background: linear-gradient(45deg, #4CAF50, #8BC34A);">
+                        <h3>✅ Disponible</h3>
+                        <p><strong>Llantas R13, R14, R15:</strong> En stock</p>
+                        <p><strong>Aceites 20W50, 15W40:</strong> Disponible</p>
+                        <p><strong>Filtros de aceite:</strong> Amplio surtido</p>
+                    </div>
+                    <div class="service-item" style="background: linear-gradient(45deg, #FF9800, #FFC107);">
+                        <h3>⚠️ Stock Limitado</h3>
+                        <p><strong>Llantas R16, R17:</strong> Pocas unidades</p>
+                        <p><strong>Baterías 12V:</strong> Últimas unidades</p>
+                        <p><strong>Aceite sintético:</strong> Stock bajo</p>
+                    </div>
+                    <div class="service-item" style="background: linear-gradient(45deg, #f44336, #FF5722);">
+                        <h3>❌ Agotado</h3>
+                        <p><strong>Llantas R18, R19:</strong> Próximo pedido</p>
+                        <p><strong>Filtros de aire K&N:</strong> En tránsito</p>
+                        <p><strong>Aceite 0W20:</strong> Llega en 3 días</p>
+                    </div>
+                    <div class="service-item" onclick="alert('¿Necesitas un producto específico? Contáctanos y lo conseguimos en 24-48 horas')">
+                        <h3>🔍 Pedidos Especiales</h3>
+                        <p>Si no encuentras lo que buscas, podemos conseguirlo</p>
+                        <p><strong>Tiempo de entrega: 24-48 horas</strong></p>
+                    </div>
+                </div>
+            `
+        };
+
+        function showSection(section) {
+            // Actualizar navegación activa
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Actualizar contenido
+            const contentArea = document.getElementById('content-area');
+            currentSection = section;
+            
+            if (sectionContent[section]) {
+                contentArea.innerHTML = sectionContent[section];
+            } else {
+                contentArea.innerHTML = `
+                    <h2 class="services-title">Sección: ${section.toUpperCase()}</h2>
+                    <div style="text-align: center; color: #666; padding: 40px;">
+                        <h3>🚧 En Desarrollo</h3>
+                        <p>Esta sección estará disponible próximamente</p>
+                        <button class="service-item" onclick="alert('¡Gracias por tu interés! Estaremos actualizando esta sección pronto.')" style="margin-top: 20px; border: none;">
+                            📧 Notificarme cuando esté lista
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function selectService(service) {
+            const messages = {
+                cambio: '¿Te interesa nuestro servicio de cambio de neumáticos? ¡Contáctanos para agendar tu cita!',
+                lubricantes: 'Mantenemos tu motor en perfecto estado. ¿Cuándo fue tu último cambio de aceite?',
+                calibracion: 'La presión correcta es crucial para tu seguridad. ¿Quieres que revisemos tus llantas?',
+                separado: 'Puedes apartar el producto que necesitas. ¡Pregúntanos por nuestros planes!',
+                llantas: '¿Buscas llantas nuevas? Tenemos las mejores marcas al mejor precio.',
+                cliente: '¡Estamos aquí para ayudarte! ¿En qué podemos asistirte hoy?'
+            };
+            
+            alert(messages[service] || '¡Gracias por tu interés! Contáctanos para más información.');
+        }
+
+        function showContact() {
+            alert('📞 Contáctanos:\n\n• Teléfono: (123) 456-7890\n• WhatsApp: +57 300 123 4567\n• Email: info@llantassas.com\n• Horarios: Lun-Sáb 8:00 AM - 6:00 PM');
+        }
+
+        function showLocation() {
+            alert('📍 Nos encontramos en:\n\nCalle Principal #123-45\nBarrio Centro\nCiudad, Colombia\n\n¡Te esperamos!');
+        }
+
+        function showQuote() {
+            const service = prompt('¿Qué servicio necesitas cotizar?\n\n1. Cambio de llantas\n2. Cambio de aceite\n3. Reparación\n4. Otro\n\nEscribe el número o describe tu necesidad:');
+            
+            if (service) {
+                alert(`¡Perfecto! Hemos recibido tu solicitud de cotización para: "${service}"\n\nNos pondremos en contacto contigo en las próximas 2 horas para enviarte una cotización personalizada.\n\n¿Tienes alguna preferencia de horario para contactarte?`);
+            }
+        }
+
+        // Animaciones y efectos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efecto de typing para el título
+            const title = document.querySelector('.welcome-box h1');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
